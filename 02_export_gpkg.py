@@ -7,6 +7,9 @@ from zipfile import ZipFile
 
 # Get an Italian Geopackage of forest reserves in the Canton of Jura.
 # To do this, an account is needed, which you can be createt at https://geodienste.ch/register.
+# Note also that some cantons require permission to download certain data. These permissions can
+# only be requested via the website. Once permissions are granted, downloading using the API will
+# be possbile.
 auth=('user', 'pass')
 
 # Obtain a download token.
