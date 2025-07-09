@@ -1,6 +1,6 @@
 # geodienste.ch API Examples
 
-This repository contains Python examples for the usage of the geodienste.ch API.
+This repository contains Python examples for using the geodienste.ch API.
 
 ## Installation
 
@@ -11,7 +11,7 @@ pipenv install
 ## Running Examples
 
 ```
-pipenv run 01_services_information.py
+pipenv run python 01_services_information.py
 ```
 
 ## Examples
@@ -21,3 +21,9 @@ pipenv run 01_services_information.py
 #### 01_services_information
 
 This example shows how to get the latest update timestamps of forest-related services for Central Switzerland.
+
+#### 02_export_gpkg
+
+This example show how to get a Geopackage of forest reserves in the Canton of Jura.
+
+
