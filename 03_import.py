@@ -24,8 +24,7 @@ response.raise_for_status()
 import_task_id = response.json()['import']['task_id']
 
 # Wait until completed
-download_url = None
-while not download_url:
+while True:
     sleep(10)
     response = get(
         url=f'https://geodienste.ch/data_agg/import_tasks/{import_task_id}/status',

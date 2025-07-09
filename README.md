@@ -26,13 +26,28 @@ This example shows how to get the latest update timestamps of forest-related ser
 
 This example show how to get a Geopackage of forest reserves in the Canton of Jura.
 
-### As Provider
+### As Provider/Delegate
 
 #### 03_import
 
 This example shows how to upload and import data.
 
-#### 03_publish
+#### 04_publish
 
 This example shows how publish imported data.
 
+#### 05_import_uploaded
+
+This example shows how to import datasets that have been uploaded by a delegate with only upload rights.
+
+#### 06_delete_dataset
+
+????
+
+#### 07_staging_export_gpkg
+
+This example shows how to get a Geopackage from staging.
+
+#### 08_validation
+
+This example shows how to validate data.
