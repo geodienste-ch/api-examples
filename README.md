@@ -28,7 +28,11 @@ This example show how to get a Geopackage of forest reserves in the Canton of Ju
 
 ### As Provider
 
-#### 03_import_publish
+#### 03_import
 
-This example shows how to upload, import and publish data.
+This example shows how to upload and import data.
+
+#### 03_publish
+
+This example shows how publish imported data.
 
