@@ -10,7 +10,7 @@ from zipfile import ZipFile
 # Note also that some cantons require permission to download certain data. These permissions can
 # only be requested via the website. Once permissions are granted, downloading using the API will
 # be possbile.
-auth=('user', 'pass')
+auth = ('user', 'pass')
 
 # Obtain a download token.
 response = post(

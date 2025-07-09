@@ -26,4 +26,9 @@ This example shows how to get the latest update timestamps of forest-related ser
 
 This example show how to get a Geopackage of forest reserves in the Canton of Jura.
 
+### As Provider
+
+#### 03_import_publish
+
+This example shows how to upload, import and publish data.
 
