@@ -10,7 +10,7 @@ auth = ('user', 'pass')
 
 # Start the export
 response = get(
-    url='https://geodienste.ch/downloads/checkdb/waldreservate/export.json',
+    url='https://geodienste.ch/downloads/checkdb/waldreservate/export',
     auth=auth,
     params={
         'format': 'gpkg',
