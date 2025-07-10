@@ -18,36 +18,18 @@ pipenv run python 01_services_information.py
 
 ### As User
 
-#### 01_services_information
-
-This example shows how to get the latest update timestamps of forest-related services for Central Switzerland.
-
-#### 02_export_gpkg
-
-This example show how to get a Geopackage of forest reserves in the Canton of Jura.
+|File|Description|
+|---|---|
+|01_services_information|How to get the latest update timestamps of forest-related services for Central Switzerland.|
+|02_export_gpkg|How to get a Geopackage of forest reserves in the Canton of Jura.|
 
 ### As Provider/Delegate
 
-#### 03_import
-
-This example shows how to upload and import data.
-
-#### 04_publish
-
-This example shows how publish imported data.
-
-#### 05_import_uploaded
-
-This example shows how to import datasets that have been uploaded by a delegate with only upload rights.
-
-#### 06_delete_dataset
-
-This example shows to to delete datasets.
-
-#### 07_staging_export_gpkg
-
-This example shows how to get a Geopackage from staging.
-
-#### 08_validation
-
-This example shows how to validate data and how to see the result of a validation.
+|File|Description|
+|---|---|
+|03_import|How to upload and import data.|
+|04_publish|How publish imported data.|
+|05_import_uploaded|How to import datasets that have been uploaded by a delegate with only upload rights.|
+|06_delete_dataset|How to delete datasets.|
+|07_staging_export_gpkg|How to get a Geopackage from staging.|
+|08_validation|How to validate data and how to see the result of a validation.|
