@@ -42,7 +42,7 @@ This example shows how to import datasets that have been uploaded by a delegate 
 
 #### 06_delete_dataset
 
-????
+This example shows to to delete datasets.
 
 #### 07_staging_export_gpkg
 
