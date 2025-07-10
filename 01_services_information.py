@@ -34,4 +34,4 @@ table = [
     [service['canton'], service['publication_data'], service['updated_at'], service['topic']]
     for service in services
 ]
-print(tabulate(table, headers=["Canton", "Publication Date", "Updated At", "Topic"], tablefmt="github"))
+print(tabulate(table, headers=["Canton", "Publication State", "Updated At", "Topic"], tablefmt="github"))
