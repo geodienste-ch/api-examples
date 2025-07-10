@@ -50,4 +50,4 @@ This example shows how to get a Geopackage from staging.
 
 #### 08_validation
 
-This example shows how to validate data.
+This example shows how to validate data and how to see the result of a validation.
