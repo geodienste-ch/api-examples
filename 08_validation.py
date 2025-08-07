@@ -4,10 +4,11 @@ from zipfile import ZipFile
 
 # Validate staging data as a delegate with validation rights
 auth = ('user', 'pass')
+server = 'https://geodienste.ch'
 
 # Start the validation by setting the status to in_validation
 response = post(
-    url='https://geodienste.ch/data_agg/validation',
+    url=f'{server}/data_agg/validation',
     auth=auth,
     params={
         'base_topic': 'planungszonen',
@@ -35,7 +36,7 @@ zipped_csv.seek(0)
 
 # Finish the validation by setting the status to completed or completed_with_errors
 response = post(
-    url='https://geodienste.ch/data_agg/validation',
+    url=f'{server}/data_agg/validation',
     auth=auth,
     params={
         'base_topic': 'planungszonen',
@@ -54,7 +55,7 @@ response.raise_for_status()
 auth = ('user', 'pass')
 
 response = get(
-    url='https://geodienste.ch/data_agg/validation/status',
+    url=f'{server}/data_agg/validation/status',
     auth=auth,
     params={
         'base_topic': 'planungszonen',

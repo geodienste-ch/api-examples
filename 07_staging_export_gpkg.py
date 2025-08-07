@@ -7,10 +7,11 @@ from zipfile import ZipFile
 
 # Get data from staging as Geopackage.
 auth = ('user', 'pass')
+server = 'https://geodienste.ch'
 
 # Start the export
 response = get(
-    url='https://geodienste.ch/downloads/checkdb/waldreservate/export',
+    url=f'{server}/downloads/checkdb/waldreservate/export',
     auth=auth,
     params={
         'format': 'gpkg',
@@ -28,7 +29,7 @@ download_url = None
 while not download_url:
     sleep(10)
     response = get(
-        url=f'https://geodienste.ch/downloads/checkdb/waldreservate/{token}/status.json',
+        url=f'{server}/downloads/checkdb/waldreservate/{token}/status.json',
         auth=auth
     )
     response.raise_for_status()

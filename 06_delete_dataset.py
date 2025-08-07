@@ -2,10 +2,11 @@ from requests import get, delete
 from time import sleep
 
 auth = ('user', 'pass')
+server = 'https://geodienste.ch'
 
 # Find out which datasets have been imported
 response = get(
-    url='https://geodienste.ch/data_agg/import_tasks/imported_datasets',
+    url=f'{server}/data_agg/import_tasks/imported_datasets',
     auth=auth,
     params={
         'topic': 'leitungskataster_v2_0',
@@ -18,7 +19,7 @@ print('\n'.join(datasets))
 
 # Delete these datasets
 response = delete(
-    url='https://geodienste.ch/data_agg/interlis/delete',
+    url=f'{server}/data_agg/interlis/delete',
     auth=auth,
     params={
         'topic': 'leitungskataster_v2_0',
@@ -34,7 +35,7 @@ import_task_id = response.json()['import']['task_id']
 while True:
     sleep(10)
     response = get(
-        url=f'https://geodienste.ch/data_agg/import_tasks/{import_task_id}/status',
+        url=f'{server}/data_agg/import_tasks/{import_task_id}/status',
     )
     response.raise_for_status()
     if response.json()['import']['status'] != 'queued':
@@ -42,7 +43,7 @@ while True:
 
 # Print logs
 response = get(
-    url=f'https://geodienste.ch/data_agg/import_tasks/{import_task_id}/logs'
+    url=f'{server}/data_agg/import_tasks/{import_task_id}/logs'
 )
 response.raise_for_status()
 print(response.text)

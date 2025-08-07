@@ -3,11 +3,12 @@ from time import sleep
 
 auth = ('user', 'pass')
 filepath = '/path/to/lv95.zip'
+server = 'https://geodienste.ch'
 
 # Upload data and start import task
 with open(filepath, 'rb') as file:
     response = post(
-        'https://geodienste.ch/data_agg/interlis/import',
+        f'{server}/data_agg/interlis/import',
         auth=auth,
         params={
             'topic': 'leitungskataster_v2_0',
@@ -27,7 +28,7 @@ import_task_id = response.json()['import']['task_id']
 while True:
     sleep(10)
     response = get(
-        url=f'https://geodienste.ch/data_agg/import_tasks/{import_task_id}/status',
+        url=f'{server}/data_agg/import_tasks/{import_task_id}/status',
     )
     response.raise_for_status()
     if response.json()['import']['status'] != 'queued':
@@ -35,7 +36,7 @@ while True:
 
 # Print import logs
 response = get(
-    url=f'https://geodienste.ch/data_agg/import_tasks/{import_task_id}/logs'
+    url=f'{server}/data_agg/import_tasks/{import_task_id}/logs'
 )
 response.raise_for_status()
 print(response.text)
