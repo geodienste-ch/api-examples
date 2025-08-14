@@ -28,8 +28,8 @@ response.raise_for_status()
 token = response.json()['token']
 
 # Start the export
-response = get(
-    url=f'https://geodienste.ch/downloads/waldreservate/{token}/export.json',
+response = post(
+    url=f'https://geodienste.ch/downloads/waldreservate/{token}/export',
     auth=auth
 )
 response.raise_for_status()

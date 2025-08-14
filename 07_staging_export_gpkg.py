@@ -1,6 +1,6 @@
 from io import BytesIO
 from os.path import basename
-from requests import get
+from requests import get, post
 from shutil import copyfileobj
 from time import sleep
 from zipfile import ZipFile
@@ -10,7 +10,7 @@ auth = ('user', 'pass')
 server = 'https://geodienste.ch'
 
 # Start the export
-response = get(
+response = post(
     url=f'{server}/downloads/checkdb/waldreservate/export',
     auth=auth,
     params={
