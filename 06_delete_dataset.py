@@ -3,7 +3,7 @@ from time import sleep
 
 auth = ('user', 'pass')
 server = 'https://geodienste.ch'
-publish = True  # Note: set to true to automatically publish after successful deletion
+publish = False  # Note: set to true to automatically publish after successful deletion
 
 # Find out which datasets have been imported
 response = get(
