@@ -4,7 +4,7 @@ This repository contains Python examples for using the geodienste.ch API.
 
 ## Installation
 
-Die hier beschriebene Installation benötigt [pipenv](https://pipenv.pypa.io).
+The installation described here requires [pipenv](https://pipenv.pypa.io).
 
 ```bash
 pipenv install

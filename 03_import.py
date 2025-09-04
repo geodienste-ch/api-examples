@@ -16,6 +16,7 @@ with open(filepath, 'rb') as file:
             'canton': 'OW',  # Note: only required for delegates
             'replace_all': False,
             'force_import': False,
+            'extract': False,  # Note: only for leitungskataster_v2_0
             'publish': publish,
         },
         files={
