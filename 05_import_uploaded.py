@@ -1,7 +1,11 @@
+"""
+Import datasets that have been uploaded by a delegate with upload-only rights.
+"""
+
 from requests import get, post
 from time import sleep
 
-auth = ('user', 'pass')
+auth = ('user', 'pass')  # IMPORTANT: Replace this your actual account credentials.
 server = 'https://geodienste.ch'
 publish = False  # Note: set to true to automatically publish after successful import
 
@@ -12,7 +16,8 @@ response = get(
     params={
         'topic': 'planerischer_gewaesserschutz',
         'canton': 'ZG',  # Note: only required for delegates
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 datasets = [dataset['dataset'] for dataset in response.json()['uploaded_datasets']]
@@ -27,7 +32,8 @@ response = post(
         'canton': 'ZG',  # Note: only required for delegates,
         'datasets': ','.join(datasets),
         'publish': publish
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 import_task_id = response.json()['import']['task_id']
@@ -37,6 +43,7 @@ while True:
     sleep(10)
     response = get(
         url=f'{server}/data_agg/import_tasks/{import_task_id}/status',
+        timeout=30
     )
     response.raise_for_status()
     if response.json()['import']['status'] != 'queued':
@@ -44,7 +51,8 @@ while True:
 
 # Print import logs
 response = get(
-    url=f'{server}/data_agg/import_tasks/{import_task_id}/logs'
+    url=f'{server}/data_agg/import_tasks/{import_task_id}/logs',
+    timeout=30
 )
 response.raise_for_status()
 print(response.text)
@@ -55,6 +63,7 @@ if publish:
     while True:
         response = get(
             url=f'{server}/data_agg/import_tasks/{import_task_id}/status',
+            timeout=30
         )
         response.raise_for_status()
         response_json = response.json()
@@ -66,5 +75,6 @@ if publish:
     # Print publish logs
     response = get(
         url=f'{server}/data_agg/publish_tasks/{publish_task_id}/logs',
+        timeout=30
     )
     print(response.text)

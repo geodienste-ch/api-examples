@@ -1,3 +1,7 @@
+"""
+Get data from staging as Geopackage.
+"""
+
 from io import BytesIO
 from os.path import basename
 from requests import get, post
@@ -5,8 +9,7 @@ from shutil import copyfileobj
 from time import sleep
 from zipfile import ZipFile
 
-# Get data from staging as Geopackage.
-auth = ('user', 'pass')
+auth = ('user', 'pass')  # IMPORTANT: Replace this your actual account credentials.
 server = 'https://geodienste.ch'
 
 # Start the export
@@ -19,7 +22,8 @@ response = post(
             'JU',
         ]),
         'locale': 'de'
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 token = response.json()['token']
@@ -30,7 +34,8 @@ while not download_url:
     sleep(10)
     response = get(
         url=f'{server}/downloads/checkdb/waldreservate/{token}/status.json',
-        auth=auth
+        auth=auth,
+        timeout=30
     )
     response.raise_for_status()
     download_url = response.json()['download_url']
@@ -38,7 +43,8 @@ while not download_url:
 # Download the zip and extract the gpkg
 response = get(
     download_url,
-    auth=auth
+    auth=auth,
+    timeout=30
 )
 response.raise_for_status()
 with ZipFile(BytesIO(response.content)) as file:

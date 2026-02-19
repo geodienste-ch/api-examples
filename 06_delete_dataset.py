@@ -1,7 +1,11 @@
+"""
+Delete dataset.
+"""
+
 from requests import get, delete
 from time import sleep
 
-auth = ('user', 'pass')
+auth = ('user', 'pass')  # IMPORTANT: Replace this your actual account credentials.
 server = 'https://geodienste.ch'
 publish = False  # Note: set to true to automatically publish after successful deletion
 
@@ -37,6 +41,7 @@ while True:
     sleep(10)
     response = get(
         url=f'{server}/data_agg/import_tasks/{import_task_id}/status',
+        timeout=30
     )
     response.raise_for_status()
     if response.json()['import']['status'] != 'queued':
@@ -44,7 +49,8 @@ while True:
 
 # Print delete logs
 response = get(
-    url=f'{server}/data_agg/import_tasks/{import_task_id}/logs'
+    url=f'{server}/data_agg/import_tasks/{import_task_id}/logs',
+    timeout=30
 )
 response.raise_for_status()
 print(response.text)
@@ -55,6 +61,7 @@ if publish:
     while True:
         response = get(
             url=f'{server}/data_agg/import_tasks/{import_task_id}/status',
+            timeout=30
         )
         response.raise_for_status()
         response_json = response.json()
@@ -66,5 +73,6 @@ if publish:
     # Print publish logs
     response = get(
         url=f'{server}/data_agg/publish_tasks/{publish_task_id}/logs',
+        timeout=30
     )
     print(response.text)

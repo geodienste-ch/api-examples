@@ -1,7 +1,10 @@
+"""
+Get information about forest-related services for Central Switzerland.
+"""
+
 from requests import get
 from tabulate import tabulate
 
-# Get information about forest-related services for Central Switzerland
 response = get(
     url='https://geodienste.ch/info/services.json',
     params={
@@ -23,7 +26,8 @@ response = get(
             'ZG'
         ]),
         'language': 'de'
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 
@@ -34,4 +38,10 @@ table = [
     [service['canton'], service['publication_data'], service['updated_at'], service['topic']]
     for service in services
 ]
-print(tabulate(table, headers=["Canton", "Publication State", "Updated At", "Topic"], tablefmt="github"))
+print(
+    tabulate(
+        table,
+        headers=["Canton", "Publication State", "Updated At", "Topic"],
+        tablefmt="github"
+    )
+)

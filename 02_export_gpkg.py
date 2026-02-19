@@ -1,3 +1,12 @@
+"""
+Get an Italian Geopackage of forest reserves in the Canton of Jura.
+
+To access this data, you need to create an account at https://geodienste.ch/register.
+
+Note: Some cantons require special permission to download certain datasets. These permissions must
+be requested through the website. Once granted, the data can be downloaded using the API.
+"""
+
 from io import BytesIO
 from os.path import basename
 from requests import get, post
@@ -5,12 +14,7 @@ from shutil import copyfileobj
 from time import sleep
 from zipfile import ZipFile
 
-# Get an Italian Geopackage of forest reserves in the Canton of Jura.
-# To do this, an account is needed, which you can be createt at https://geodienste.ch/register.
-# Note also that some cantons require permission to download certain data. These permissions can
-# only be requested via the website. Once permissions are granted, downloading using the API will
-# be possbile.
-auth = ('user', 'pass')
+auth = ('user', 'pass')  # IMPORTANT: Replace this your actual account credentials.
 
 # Obtain a download token.
 response = post(
@@ -22,7 +26,8 @@ response = post(
             'JU',
         ]),
         'locale': 'it'
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 token = response.json()['token']
@@ -30,7 +35,8 @@ token = response.json()['token']
 # Start the export
 response = post(
     url=f'https://geodienste.ch/downloads/waldreservate/{token}/export',
-    auth=auth
+    auth=auth,
+    timeout=30
 )
 response.raise_for_status()
 
@@ -40,7 +46,8 @@ while not download_url:
     sleep(10)
     response = get(
         url=f'https://geodienste.ch/downloads/waldreservate/{token}/status.json',
-        auth=auth
+        auth=auth,
+        timeout=30
     )
     response.raise_for_status()
     download_url = response.json()['download_url']
@@ -48,7 +55,8 @@ while not download_url:
 # Download the zip and extract the gpkg
 response = get(
     download_url,
-    auth=auth
+    auth=auth,
+    timeout=30
 )
 response.raise_for_status()
 with ZipFile(BytesIO(response.content)) as file:

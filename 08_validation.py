@@ -1,9 +1,14 @@
+"""
+Validate data and get the result of a validation.
+"""
+
 from io import BytesIO
 from requests import get, post
 from zipfile import ZipFile
 
-# Validate staging data as a delegate with validation rights
-auth = ('user', 'pass')
+# Validate staging data as a delegate with validation rights.
+
+auth = ('user', 'pass')  # IMPORTANT: Replace this your actual account credentials.
 server = 'https://geodienste.ch'
 
 # Start the validation by setting the status to in_validation
@@ -15,7 +20,8 @@ response = post(
         'canton': 'SH',
         'status': 'in_validation',
         'message': 'starting valdiation now'
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 
@@ -47,12 +53,13 @@ response = post(
     files={
         'csv_file': zipped_csv
         # Note: you could also upload a zip with a Geopackage (gpkg_file)
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 
 # Get the results of the validation as delegate with import rights or provider
-auth = ('user', 'pass')
+auth = ('user', 'pass')  # IMPORTANT: Replace this your actual account credentials.
 
 response = get(
     url=f'{server}/data_agg/validation/status',
@@ -60,7 +67,8 @@ response = get(
     params={
         'base_topic': 'planungszonen',
         'canton': 'SH',
-    }
+    },
+    timeout=30
 )
 response.raise_for_status()
 print(response.json()['message'])
@@ -68,7 +76,8 @@ print(response.json()['message'])
 csv_url = response.json()['csv']
 response = get(
     csv_url,
-    auth=auth
+    auth=auth,
+    timeout=30
 )
 response.raise_for_status()
 with ZipFile(BytesIO(response.content)) as file:
